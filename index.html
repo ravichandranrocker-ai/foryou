@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Heartfelt Confession</title>
+    <style>
+        :root {
+            --text-glow: #ffecd2;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            color: var(--text-glow);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-color: transparent;
+        }
+
+        /* Background Image with Dark Overlay */
+        #bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -3;
+        }
+
+        #bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 26, 0.4); /* Darkens the image slightly so text is readable */
+            z-index: -2;
+        }
+
+        /* Particles Canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Start Overlay */
+        #start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 26, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 1.5s ease-out;
+        }
+
+        .pulse-text {
+            font-size: 1.1rem;
+            color: var(--text-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse 2.5s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 0.3; transform: scale(0.98); }
+        }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 24px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-icon {
+            font-size: 2.5rem;
+            color: var(--text-glow);
+            text-shadow: 0 0 15px rgba(255, 236, 210, 0.6);
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 2s ease-out, transform 2s ease-out;
+            font-weight: bold;
+        }
+
+        .stanza {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            /* Added a subtle glass effect so bold text pops over the starry background */
+            background: rgba(0, 0, 0, 0.35);
+            padding: 25px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .stanza.visible, .header-icon.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tamil Text styling updated to be bold and glow slightly over the image */
+        .tamil {
+            font-size: 1.25rem;
+            line-height: 2;
+            color: var(--text-glow);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 236, 210, 0.3);
+            margin: 0;
+            font-weight: bold; /* Made the text bold as requested */
+            letter-spacing: 0.5px;
+        }
+
+        /* Audio element (hidden) */
+        audio {
+            display: none;
+        }
+
+        /* Footer space */
+        .footer-space {
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div id="bg-image"></div>
+    <div id="bg-overlay"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Tap to Begin Overlay -->
+    <div id="start-overlay">
+        <div class="pulse-text">Tap to begin</div>
+    </div>
+
+    <!-- Hidden Audio Player -->
+    <audio id="bg-audio" loop>
+        <source src="ambient-flute.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="content">
+        <!-- Minimal Title / Header -->
+        <div class="header-icon">☾</div>
+
+        <div class="stanza">
+            <p class="tamil">ஓயாத பகலிலும், உறங்காத இரவிலும்,<br>உன்னை நான் ஒரு கணமும் மறந்ததில்லை.</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">சில நொடிகள் மட்டுமே உன்னை நான் பார்த்தாலும்,<br>பல நாட்களாக நீ என் நினைவிலேயே வாழ்கிறாய்!</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">சலிப்பால் பலமுறை நான் கல்லூரிக்கு விடுப்பு எடுத்தேன்,<br>ஆனால் இப்போது எத்தனை பிரச்சனைகள் வந்தாலும் உனக்காகவே கல்லூரிக்கு வருகிறேன்,</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">இது வெறும் மோகம், காலப்போக்கில் மறையும் என நினைத்தேன்,<br>ஆனால் ஏதோ ஒரு சக்தி மீண்டும் மீண்டும் என்னை உன்னிடமே இழுக்கிறது!</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">கடந்த கால நிகழ்வுகளால் உன்மீது சிறு கோபம் வந்ததே தவிர,<br>ஒருபோதும் என் நெஞ்சம் உன்னை வெறுத்ததில்லை.</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">நீ அருகில் இல்லாத தனிமை என்னை வாட்டுகிறது,<br>வார்த்தைகளால் சொல்ல முடியாதபடி உன்னைத் தேடுகிறேன்.</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">ஆகவே, அச்சமும் கவலையும் உன் மனதை ஆட்கொள்ள வேண்டாம்,<br>நான் உன்னை விட்டு விலகிவிட்டேன் என்று எண்ண வேண்டாம்.</p>
+        </div>
+
+        <div class="stanza">
+            <p class="tamil">கலங்காதே, நான் எங்கும் சென்றுவிடவில்லை,<br>என் நினைவுகளில் எப்போதும் நீயே நிறைந்திருப்பாய்!</p>
+        </div>
+        
+        <div class="footer-space"></div>
+    </div>
+
+    <script>
+        // --- Interaction & Audio Setup ---
+        const startOverlay = document.getElementById('start-overlay');
+        const audio = document.getElementById('bg-audio');
+
+        startOverlay.addEventListener('click', () => {
+            startOverlay.style.opacity = '0';
+            setTimeout(() => {
+                startOverlay.style.display = 'none';
+                document.querySelector('.header-icon').classList.add('visible');
+            }, 1500);
+
+            audio.volume = 0;
+            
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    let volume = 0;
+                    const fadeInterval = setInterval(() => {
+                        if (volume < 0.4) {
+                            volume += 0.02;
+                            audio.volume = volume;
+                        } else {
+                            clearInterval(fadeInterval);
+                        }
+                    }, 100);
+                }).catch(error => {
+                    console.log("Audio playback failed or audio file not found.");
+                });
+            }
+        });
+
+        // --- Scroll Reveal Logic ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stanza').forEach(stanza => {
+            observer.observe(stanza);
+        });
+
+        // --- Antigravity Particles Effect ---
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particlesArray = [];
+
+        function initCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = Math.random() * 0.4 + 0.1;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.pulseSpeed = Math.random() * 0.02 + 0.005;
+                this.pulseDir = 1;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += Math.sin(this.y * 0.01) * 0.2;
+                this.opacity += this.pulseSpeed * this.pulseDir;
+                
+                if (this.opacity >= 0.7 || this.opacity <= 0.1) {
+                    this.pulseDir *= -1;
+                }
+
+                if (this.y < -10) {
+                    this.y = height + 10;
+                    this.x = Math.random() * width;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 236, 210, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particlesArray = [];
+            const numParticles = Math.floor((width * height) / 15000); 
+            for (let i = 0; i < numParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initCanvas();
+        createParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            initCanvas();
+            createParticles();
+        });
+    </script>
+</body>
+</html>
